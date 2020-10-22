@@ -1,5 +1,5 @@
 CARD_DIRECTORY?=cards
-CARD_PANE_HEIGHT?=$(firstword $(shell wc -l $(CARD_DIRECTORY)/*|head -n-1|sort -n|tail -n1))
+CARD_PANE_HEIGHT?=$(firstword $(shell wc -l $(CARD_DIRECTORY)/*|grep -vP '^\s*\d+\s*total\s*$'|sort -n|tail -n1))
 OUTPUT?=rec-$(shell date +%s).asciicast
 REC_IDLE_LIMIT?=1  # Limit recorded terminal inactivity to max 1 sec
 TMUX_SESSION_NAME?=screencast
@@ -76,6 +76,7 @@ dependencies:
 	tmux -V
 	asciinema --version
 	ls $(CARD_DIRECTORY)/* > /dev/null
+	grep --version
 
 
 .PHONY: .tmux-initialize
