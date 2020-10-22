@@ -35,6 +35,16 @@ trying to explain what's going on in the recorded terminal.
     End Tmux session that was created for the screencast
 
 
+## Demo
+
+Full user experience:
+
+[![asciicast](https://asciinema.org/a/366954.svg)](https://asciinema.org/a/366954)
+
+[This is the screencast](https://asciinema.org/a/366955) that was created in
+demo session.
+
+
 ## Configuration
 
 Some environment variables may be used to fine tune the process:
