@@ -105,6 +105,8 @@ dependencies:
 .PHONY: .tmux-initialize
 .tmux-initialize: .only-tmux
 	tmux set -g status off
+	tmux set -g pane-active-border-style fg=white
+	tmux set -g pane-border-style fg=white
 	tmux setw -g pane-base-index 1
 	tmux split-window
 	tmux resize-pane -t 1 -y $(shell expr 1 + $$(echo "$$PRE_CARD"|wc -l))
