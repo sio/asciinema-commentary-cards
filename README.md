@@ -39,8 +39,8 @@ trying to explain what's going on in the recorded terminal.
 
 Some environment variables may be used to fine tune the process:
 
-- `OUTPUT` - Path to save the asciicast file. Default value is based on Unix
-  timestamp: "rec-`date +%s`.asciicast`
+- `OUTPUT` - Path to save the asciicast file to. Default value is based on Unix
+  timestamp: "rec-$(date +%s).asciicast"
 - `ASCIINEMA` - Path to asciinema executable. Default: "asciinema"
 - `CARD_PANE_HEIGHT` - Height of cards pane. Default value is calculated to
   fit all lines from your largest card
