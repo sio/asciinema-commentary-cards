@@ -1,5 +1,14 @@
 CARD_DIRECTORY?=cards
-CARD_PANE_HEIGHT?=$(firstword $(shell wc -l $(CARD_DIRECTORY)/*|grep -vP '^\s*\d+\s*total\s*$'|sort -n|tail -n1))
+CARD_PANE_HEIGHT?=$(shell \
+	expr \
+		1 + \
+		$$(wc -l $(CARD_DIRECTORY)/* \
+		  |grep -vP '^\s*\d+\s*total\s*$$' \
+		  |sort -n \
+		  |tail -n1 \
+		  |xargs \
+		  |cut -d\  -f1) \
+)
 OUTPUT?=rec-$(shell date +%s).asciicast
 REC_IDLE_LIMIT?=1  # Limit recorded terminal inactivity to max 1 sec
 TMUX_SESSION_NAME?=screencast
@@ -84,7 +93,7 @@ dependencies:
 	tmux set -g status off
 	tmux setw -g pane-base-index 1
 	tmux split-window
-	tmux resize-pane -t 1 -y $(shell echo "$$PRE_CARD"|wc -l)
+	tmux resize-pane -t 1 -y $(shell expr 1+$$(echo "$$PRE_CARD"|wc -l))
 	tmux send-keys -t 1 'make cards' Enter
 	tmux bind -n C-Space send-keys -t 1 Enter  # Ctrl+Space to show next card
 	tmux bind -n C-] detach
