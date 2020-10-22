@@ -73,7 +73,7 @@ dependencies:
 
 .PHONY: .check-env
 .check-env:
-	tmux --version
+	tmux -V
 	asciinema --version
 
 
