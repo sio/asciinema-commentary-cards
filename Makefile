@@ -76,14 +76,14 @@ destroy:
 .PHONY: cards
 cards: .only-tmux
 	tput civis  # hide cursor
-	clear; echo "$$PRE_CARD"; $(ANY_KEY)
+	clear; echo -n "$$PRE_CARD"; $(ANY_KEY)
 	tmux resize-pane -t 1 -y $(CARD_PANE_HEIGHT)
 	-while true; do \
 		for filename in $(CARD_DIRECTORY)/*; do \
 			clear; cat "$$filename"; $(ANY_KEY); \
 		done; \
 		clear; $(ANY_KEY); \
-		clear; echo "$$POST_CARD"; $(ANY_KEY); \
+		clear; echo -n "$$POST_CARD"; $(ANY_KEY); \
 	done
 	tput cnorm  # restore cursor
 
@@ -109,7 +109,7 @@ dependencies:
 	tmux set -g pane-border-style fg=white
 	tmux setw -g pane-base-index 1
 	tmux split-window
-	tmux resize-pane -t 1 -y $(shell expr 1 + $$(echo "$$PRE_CARD"|wc -l))
+	tmux resize-pane -t 1 -y $(shell echo "$$PRE_CARD"|wc -l)
 	tmux send-keys -t 1 'make cards' Enter
 	tmux bind -n C-Space send-keys -t 1 Enter  # Ctrl+Space to show next card
 	tmux bind -n C-] detach
