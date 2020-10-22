@@ -82,10 +82,10 @@ dependencies:
 
 .PHONY: .check-env
 .check-env:
-	tmux -V
-	asciinema --version
-	ls $(CARD_DIRECTORY)/* > /dev/null
-	grep --version
+	@tmux -V
+	@asciinema --version
+	@ls $(CARD_DIRECTORY)/* > /dev/null
+	@grep --version
 
 
 .PHONY: .tmux-initialize
