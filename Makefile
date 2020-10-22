@@ -93,7 +93,7 @@ dependencies:
 	tmux set -g status off
 	tmux setw -g pane-base-index 1
 	tmux split-window
-	tmux resize-pane -t 1 -y $(shell expr 1+$$(echo "$$PRE_CARD"|wc -l))
+	tmux resize-pane -t 1 -y $(shell expr 1 + $$(echo "$$PRE_CARD"|wc -l))
 	tmux send-keys -t 1 'make cards' Enter
 	tmux bind -n C-Space send-keys -t 1 Enter  # Ctrl+Space to show next card
 	tmux bind -n C-] detach
