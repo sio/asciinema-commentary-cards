@@ -57,7 +57,7 @@ record: .not-tmux
 	@echo "Press Enter when you're ready..."
 	@$(ANY_KEY)
 	asciinema rec "$(OUTPUT)" -c "tmux attach -t $(TMUX_SESSION_NAME)" -i $(REC_IDLE_LIMIT)
-	@echo "Run `make destroy` to kill tmux session used for recording"
+	@echo "Run 'make destroy' to kill tmux session used for recording"
 
 
 .PHONY: destroy
