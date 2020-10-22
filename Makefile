@@ -52,12 +52,12 @@ prepare: .not-tmux .check-env
 
 .PHONY: record
 record: .not-tmux
-	echo "Starting asciinema recording (use Ctrl+d to stop)..."
-	echo
-	echo "Press Enter when you're ready..."
-	$(ANY_KEY)
+	@echo "Starting asciinema recording (use Ctrl+d to stop)..."
+	@echo
+	@echo "Press Enter when you're ready..."
+	@$(ANY_KEY)
 	asciinema rec "$(OUTPUT)" -c "tmux attach -t $(TMUX_SESSION_NAME)" -i $(REC_IDLE_LIMIT)
-	echo "Run `make destroy` to kill tmux session used for recording"
+	@echo "Run `make destroy` to kill tmux session used for recording"
 
 
 .PHONY: destroy
