@@ -65,6 +65,12 @@ cards: .only-tmux
 	tput cnorm  # restore cursor
 
 
+.PHONY: dependencies
+dependencies:
+	apt update
+	apt -y install asciinema tmux
+
+
 .PHONY: .check-env
 .check-env:
 	tmux --version
