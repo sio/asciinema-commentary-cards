@@ -47,7 +47,7 @@ export POST_CARD
 
 .PHONY: prepare
 prepare: .not-tmux .check-env
-	tmux new -s $(TMUX_SESSION_NAME) "$(MAKE) .tmux-initialize; $(SHELL)"
+	tmux new -A -s $(TMUX_SESSION_NAME) "$(MAKE) .tmux-initialize; $(SHELL)"
 
 
 .PHONY: record
