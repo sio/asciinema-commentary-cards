@@ -75,6 +75,7 @@ dependencies:
 .check-env:
 	tmux -V
 	asciinema --version
+	ls $(CARD_DIRECTORY)/* > /dev/null
 
 
 .PHONY: .tmux-initialize
