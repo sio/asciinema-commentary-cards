@@ -5,6 +5,7 @@ REC_IDLE_LIMIT?=1  # Limit recorded terminal inactivity to max 1 sec
 TMUX_SESSION_NAME?=screencast
 
 SHELL=/bin/bash  # read in sh works differently
+ANY_KEY=read -n1 -s
 
 
 define PRE_CARD
@@ -45,21 +46,21 @@ record: .not-tmux
 	echo "Starting asciinema recording (use Ctrl+d to stop)..."
 	echo
 	echo "Press Enter when you're ready..."
-	read
+	$(ANY_KEY)
 	asciinema rec "$(OUTPUT)" -c "tmux attach -t $(TMUX_SESSION_NAME)" -i $(REC_IDLE_LIMIT)
 
 
 .PHONY: cards
 cards: .only-tmux
 	tput civis  # hide cursor
-	clear; echo "$$PRE_CARD"; read
+	clear; echo "$$PRE_CARD"; $(ANY_KEY)
 	tmux resize-pane -t 1 -y $(CARD_PANE_HEIGHT)
 	-while true; do \
 		for filename in $(CARD_DIRECTORY)/*; do \
-			clear; cat "$$filename"; read; \
+			clear; cat "$$filename"; $(ANY_KEY); \
 		done; \
-		clear; read; \
-		clear; echo "$$POST_CARD"; read; \
+		clear; $(ANY_KEY); \
+		clear; echo "$$POST_CARD"; $(ANY_KEY); \
 	done
 	tput cnorm  # restore cursor
 
