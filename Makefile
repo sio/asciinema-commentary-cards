@@ -61,6 +61,13 @@ record: .not-tmux
 	@echo "Run 'make destroy' to kill tmux session used for recording"
 
 
+.PHONY: play
+ifeq (,$(wildcard $(OUTPUT)))
+play: OUTPUT=$(lastword $(wildcard rec-*.asciicast))
+endif
+play:
+	$(ASCIINEMA) play $(OUTPUT)
+
 .PHONY: destroy
 destroy:
 	tmux kill-session -t $(TMUX_SESSION_NAME)
