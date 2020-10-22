@@ -63,7 +63,7 @@ record: .not-tmux
 
 .PHONY: play
 ifeq (,$(wildcard $(OUTPUT)))
-play: OUTPUT=$(lastword $(wildcard rec-*.asciicast))
+play: OUTPUT=$(lastword $(sort $(wildcard rec-*.asciicast)))
 endif
 play:
 	$(ASCIINEMA) play $(OUTPUT)
