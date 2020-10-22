@@ -66,6 +66,7 @@ endif
 play:
 	$(ASCIINEMA) play $(OUTPUT)
 
+
 .PHONY: destroy
 destroy:
 	tmux kill-session -t $(TMUX_SESSION_NAME)
