@@ -1,3 +1,4 @@
+OUTPUT?=rec-$(shell date +%s).asciicast
 CARD_DIRECTORY?=cards
 CARD_PANE_HEIGHT?=$(shell \
 	expr \
@@ -9,7 +10,6 @@ CARD_PANE_HEIGHT?=$(shell \
 		  |xargs \
 		  |cut -d\  -f1) \
 )
-OUTPUT?=rec-$(shell date +%s).asciicast
 REC_IDLE_LIMIT?=1  # Limit recorded terminal inactivity to max 1 sec
 TMUX_SESSION_NAME?=screencast
 
