@@ -14,6 +14,7 @@ REC_IDLE_LIMIT?=1  # Limit recorded terminal inactivity to max 1 sec
 TMUX_SESSION_NAME?=screencast
 
 SHELL=/bin/bash  # read in sh works differently
+ASCIINEMA?=asciinema
 ANY_KEY=read -n1 -s
 
 
@@ -56,7 +57,7 @@ record: .not-tmux
 	@echo
 	@echo "Press Enter when you're ready..."
 	@$(ANY_KEY)
-	asciinema rec "$(OUTPUT)" -c "tmux attach -t $(TMUX_SESSION_NAME)" -i $(REC_IDLE_LIMIT)
+	$(ASCIINEMA) rec "$(OUTPUT)" -c "tmux attach -t $(TMUX_SESSION_NAME)" -i $(REC_IDLE_LIMIT)
 	@echo "Run 'make destroy' to kill tmux session used for recording"
 
 
@@ -89,7 +90,7 @@ dependencies:
 .PHONY: .check-env
 .check-env:
 	@tmux -V
-	@asciinema --version
+	@$(ASCIINEMA) --version
 	@ls $(CARD_DIRECTORY)/* > /dev/null
 	@grep --version
 
