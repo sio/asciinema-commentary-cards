@@ -1,14 +1,12 @@
 OUTPUT?=rec-$(shell date +%s).asciicast
 CARD_DIRECTORY?=cards
 CARD_PANE_HEIGHT?=$(shell \
-	expr \
-		1 + \
-		$$(wc -l $(CARD_DIRECTORY)/* \
+		wc -l $(CARD_DIRECTORY)/* \
 		  |grep -vP '^\s*\d+\s*total\s*$$' \
 		  |sort -n \
 		  |tail -n1 \
 		  |xargs \
-		  |cut -d\  -f1) \
+		  |cut -d\  -f1 \
 )
 REC_IDLE_LIMIT?=1  # Limit recorded terminal inactivity to max 1 sec
 TMUX_SESSION_NAME?=screencast
@@ -80,7 +78,7 @@ cards: .only-tmux
 	tmux resize-pane -t 1 -y $(CARD_PANE_HEIGHT)
 	-while true; do \
 		for filename in $(CARD_DIRECTORY)/*; do \
-			clear; cat "$$filename"; $(ANY_KEY); \
+			clear; echo -n "$$(cat $$filename)"; $(ANY_KEY); \
 		done; \
 		clear; $(ANY_KEY); \
 		clear; echo -n "$$POST_CARD"; $(ANY_KEY); \
